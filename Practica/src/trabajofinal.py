@@ -4,7 +4,7 @@ from libsss import validar_nombre
 from libsss import validar_dni
 
 def menu():
-    """Function printing python version."""
+    """Menu de Opciones del menu principal"""
     print("=".center(50,'='))
     print("Restaurante Astrid & Gastón".center(50,' '))
     print("MENU".center(50,' '))
@@ -16,7 +16,7 @@ def menu():
     print("=".center(50,'='))
 
 def mediterranea():
-    """Function printing python version."""
+    """Menu de Opciones de Comida  Mediterranea"""
     print()
     print("COMIDA MEDITERRANEA".center(50,' '))
     print("=".center(50,'='))
@@ -31,7 +31,7 @@ def mediterranea():
     print("=".center(50,'='))
 
 def criolla():
-    """Function printing python version."""
+    """Menu de Opciones de Comida Criolla"""
     print()
     print("COMIDA CRIOLLA".center(50,' '))
     print("=".center(50,'='))
@@ -47,7 +47,7 @@ def criolla():
 
 
 def marina():
-    """Function printing python version."""
+    """Menu de Opciones de Comida Marina"""
     print()
     print("COMIDA MARINA".center(50,' '))
     print("=".center(50,'='))
@@ -57,14 +57,12 @@ def marina():
     print('    D |=========== SALIR =============')
     print("=".center(50,'='))
 
-def listado(orders,pu):
-    """Function printing python version."""
-    for i, (plato, precio) in enumerate(zip(orders, pu), start=1):
-     
-                        #print(f"{i}. {plato}-s/ {subtotal}")
+def detalle_pedido(listado_platos_pedido,precio_platos_pedido):
+    """lista los platos y los subtotales"""
+    for i, (plato, precio) in enumerate(zip(listado_platos_pedido, precio_platos_pedido), start=1):
         print(f"{i}. {plato}  S/.:{precio: >5}")
 
-def option_d (subtotal,orders,pu):
+def option_d (subtotal,listado_platos_pedido,precio_platos_pedido):
     """Function printing python version."""    
     if subtotal>0:
         print("=".center(50,'='))
@@ -73,18 +71,16 @@ def option_d (subtotal,orders,pu):
         print("=".center(50,'='))
         nombres=validar_nombre()
         dni=validar_dni()
-        # usuario={"Nombre":nombres,"DNI": dni} 
         print("=".center(50,'='))
         print("BOLETA DE VENTA ELECTRONICA".center(50,' '))
         print("=".center(50,'='))
         print("Fecha y hora : " + time.strftime("%c"))
-        # print(f"DNI CLIENTE:  {usuario['DNI']}")
         print("DNI : " + str(dni))
         print("Cliente : " + str(nombres))
         print("=".center(50,'='))
         print("DETALLE DE VENTA".center(50,' '))
         print("=".center(50,'='))
-        listado(orders,pu)
+        detalle_pedido(listado_platos_pedido,precio_platos_pedido)
         print("=".center(50,'='))
         print(f' Subtotal  S/.    : {subtotal}')
         print(f' I.G.V. 18.00 S/. : {round(subtotal*0.18,2)}')
@@ -96,10 +92,10 @@ def option_d (subtotal,orders,pu):
 
 
 def main():
-    """Function printing python version."""
+    """Function principal"""
     subtotal = 0
-    orders = []
-    pu = []
+    listado_platos_pedido = []
+    precio_platos_pedido = []
     while True :
         menu()
         sub1=input("Seleccione un Item : ").upper()
@@ -130,7 +126,7 @@ def main():
                     print("---Esa opcion no se encuentra disponible solo ingrese las LETRAS DISPONIBLES---")
                 print("OK algo mas desea pedir ?")
 
-        #ahora el buble de almuerzo
+        
         elif sub1 == "B": 
                 
             while True:
@@ -159,7 +155,7 @@ def main():
                 else:
                     print("Esa opcion no se encuentra disponible solo ingrese las LETRAS DISPONIBLES")
                 print("OK algo mas desea pedir ?")
-        #AHORA EL BUCLE DE LA CENA
+        
         elif sub1 == "C":
             inv = {
                 'A' : {'nombre':'Lomo de Robalo','precio': 92.50},
@@ -172,8 +168,8 @@ def main():
                 letra_marina=input("Seleccione un LETRA : ").upper()
                 if letra_marina in inv:
                     subtotal += inv[letra_marina]['precio']
-                    orders.append(inv[letra_marina]['nombre'])
-                    pu.append(inv[letra_marina]['precio'])
+                    listado_platos_pedido.append(inv[letra_marina]['nombre'])
+                    precio_platos_pedido.append(inv[letra_marina]['precio'])
                    
 
                 elif letra_marina =="D":
@@ -185,7 +181,7 @@ def main():
 
         #ahora la opcion de la boleta
         elif sub1=="D":
-            option_d(subtotal,orders,pu)
+            option_d(subtotal,listado_platos_pedido,precio_platos_pedido)
             break
             
         else:
