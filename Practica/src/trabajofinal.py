@@ -157,7 +157,7 @@ def main():
                 print("OK algo mas desea pedir ?")
         
         elif sub1 == "C":
-            inv = {
+            menu_marina = {
                 'A' : {'nombre':'Lomo de Robalo','precio': 92.50},
                 'B' : {'nombre':'Cebiche clásico','precio': 87.50},
                 'C' : {'nombre':'Tiradito de Lenguado','precio': 69.00},
@@ -166,10 +166,10 @@ def main():
             while True:
                 marina()
                 letra_marina=input("Seleccione un LETRA : ").upper()
-                if letra_marina in inv:
-                    subtotal += inv[letra_marina]['precio']
-                    listado_platos_pedido.append(inv[letra_marina]['nombre'])
-                    precio_platos_pedido.append(inv[letra_marina]['precio'])
+                if letra_marina in menu_marina:
+                    subtotal += menu_marina[letra_marina]['precio']
+                    listado_platos_pedido.append(menu_marina[letra_marina]['nombre'])
+                    precio_platos_pedido.append(menu_marina[letra_marina]['precio'])
                    
 
                 elif letra_marina =="D":
@@ -179,7 +179,7 @@ def main():
                     print("Esa opcion no se encuentra disponible solo ingrese las LETRAS DISPONIBLES")
                 print("OK algo mas desea pedir ?")
 
-        #ahora la opcion de la boleta
+    
         elif sub1=="D":
             option_d(subtotal,listado_platos_pedido,precio_platos_pedido)
             break
